@@ -56,3 +56,12 @@ class UserDetailView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+    
+
+
+class AuthStatusView(APIView):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return Response({'is_authenticated': True})
+        else:
+            return Response({'is_authenticated': False})
