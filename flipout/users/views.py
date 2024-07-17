@@ -4,21 +4,42 @@ from rest_framework.views import APIView
 from django.contrib.auth import authenticate, login, logout
 from .serializers import UserSerializer
 
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
+from django.utils.decorators import method_decorator
+from rest_framework.permissions import AllowAny, IsAuthenticated
+
+from django.middleware.csrf import get_token
+from django.http import JsonResponse
+
+def get_csrf(request):
+    token = get_token(request)
+    return JsonResponse({'csrfToken': token})
+
 class RegisterView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.AllowAny]
 
-class LoginView(APIView):
-    permission_classes = [permissions.AllowAny]
+@method_decorator(ensure_csrf_cookie, name='dispatch')
+class GetCSRFToken(APIView):
+    permission_classes = [AllowAny]
 
+    def get(self, request):
+        return Response({"detail": "CSRF cookie set"})
+
+class LoginView(APIView):
+    permission_classes = [AllowAny]
+
+    # @method_decorator(ensure_csrf_cookie)
+    @method_decorator(csrf_exempt)
     def post(self, request):
         email = request.data.get('email')
         password = request.data.get('password')
         user = authenticate(request, email=email, password=password)
         if user:
             login(request, user)
+            serializer = UserSerializer(user)
             return Response({
-                "user": UserSerializer(user).data,
+                "user": serializer.data,
                 "detail": "Successfully logged in."
             })
         else:

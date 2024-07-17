@@ -27,7 +27,24 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
 
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:5173',  # Ajusta esto a la URL de tu frontend
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:5173',  # Ajusta esto a la URL de tu frontend
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+
+# Configuración de sesiones
+SESSION_COOKIE_SECURE = True  # Solo envía la cookie de sesión sobre HTTPS
+SESSION_COOKIE_HTTPONLY = True  # Previene el acceso a la cookie de sesión a través de JavaScript
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,8 +61,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
