@@ -1,0 +1,76 @@
+[
+    {
+        "id":1,
+        "nombre":"Fontanar del Rio",
+        "descripcion":"Un skatepark grande con modulos de diferentes dificultades",
+        "img":"https://cartelurbano.com/sites/default/files/skate-cuadro_0.jpg",
+        "geocode": [4.754731743966792, -74.11157140094889],
+        "popUp": "SkatePark Fontanar del Rio"
+    },
+    {
+        "id":2,
+        "nombre":"Parque Piloto",
+        "descripcion":"Un skatepark pequenio en forma de circutio",
+        "img":"https://lh3.googleusercontent.com/p/AF1QipPP9SpGCXJTtZx84QQwaHbXmiYfUFrFz4bKyWvx=s680-w680-h510",
+        "geocode": [4.734866165612362, -74.10723110291629],
+        "popUp": "SkatePark Parque Piloto"
+    },
+    {
+        "id":3,
+        "nombre":"LowPark",
+        "descripcion":"Un spot ideal para aprender baranda y cajo",
+        "img":"https://lh3.googleusercontent.com/p/AF1QipMA5lmAAcNivr-NucdLZI6Xf6hGMao_UPas8vrL=s680-w680-h510",
+        "geocode": [4.743944793981617, -74.11182130068667],
+        "popUp": "LowPark"
+    },
+    {
+        "id":4,
+        "nombre":"Tercer Milenio",
+        "descripcion":"Gran skatepark con modulos de diferentes dificultades",
+        "img":"https://lh3.googleusercontent.com/p/AF1QipO-v2XARx4IUAmDkBz2hsX-OgpVeJrV8IGd8hm0=s680-w680-h510",
+        "geocode": [4.597669659509719, -74.08126496160729],
+        "popUp": "SkatePark Tercer Milenio"
+    },
+    {
+        "id":5,
+        "nombre":"Plaza Santander",
+        "descripcion":"Iconico spot de flat de la ciudad de bogota",
+        "img":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/BOG_PArque_Santander.JPG/1280px-BOG_PArque_Santander.JPG",
+        "geocode": [4.601948230097139, -74.07253949986793],
+        "popUp": "Plaza Santander"
+    },
+    {
+        "id":6,
+        "nombre":"Spot Puente de la 68",
+        "descripcion":"Nuevo spot debajo del puente de la 68",
+        "img":"../assets/img/img01_spot68.png",
+        "geocode": [4.684019994703937, -74.07873726899953],
+        "popUp": "Spot de la 68"
+    },
+    {
+        "id":7,
+        "nombre":"Spot Ean",
+        "descripcion":"Spot de la Univesidad Ean",
+        "img":"../assets/img/img02_spotEan.png",
+        "geocode": [4.663368312552752, -74.05458717993618],
+        "popUp": "Spot de la U Ean"
+    },
+    {
+        "id":8,
+        "nombre":"Spot C.C. Andino",
+        "descripcion":"Spot Frente al Centro comercial Andino",
+        "img":"../assets/img/img03_spotBanColCra11.png",
+        "geocode": [4.665566616291858, -74.05301116443364],
+        "popUp": "Spot del CC Andino"
+    }
+    ,
+    {
+        "id":9,
+        "nombre":"Spot Casa Blanca Suba",
+        "descripcion":"Spot de una barra para deslizar junto a una coyota",
+        "img":"../assets/img/img04_spotCasaBlanca.png",
+        "geocode": [4.735996713759985, -74.07698960050233],
+        "popUp": "Spot de Casa Blanca Suba"
+    }
+
+]

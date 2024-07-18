@@ -5,6 +5,8 @@ import { Register } from '../pages/Auth/Register';
 import { Login } from '../pages/Auth/Login';
 import Home from '../pages/Home';
 
+import { SpotFormPage } from '../pages/SpotFormPage'
+
 function AppContent() {
   const location = useLocation();
   const hideNavbar = location.pathname === '/login' || location.pathname === '/register';
@@ -14,6 +16,7 @@ function AppContent() {
       {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/new-spot" element={<SpotFormPage/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>
