@@ -77,16 +77,15 @@ export const Register = () => {
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img className="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Registro</h2>
+        <img className="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="FreeRail" />
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-300">Registro</h2>
       </div>
-
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             {/* Nombre */}
             <div className="sm:col-span-3">
-              <label htmlFor="first_name" className="block text-sm font-medium leading-6 text-gray-900">Nombre:</label>
+              <label htmlFor="first_name" className="block text-sm font-medium leading-6 text-gray-300">Nombre:</label>
               <div className="mt-2">
                 <input
                   type="text"
@@ -101,7 +100,7 @@ export const Register = () => {
 
             {/* Apellido */}
             <div className="sm:col-span-3">
-              <label htmlFor="last_name" className="block text-sm font-medium leading-6 text-gray-900">Apellido:</label>
+              <label htmlFor="last_name" className="block text-sm font-medium leading-6 text-gray-300">Apellido:</label>
               <div className="mt-2">
                 <input
                   type="text"
@@ -116,7 +115,7 @@ export const Register = () => {
 
             {/* Correo Electrónico */}
             <div className="sm:col-span-full">
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Correo Electrónico:</label>
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-300">Correo Electrónico:</label>
               <div className="mt-2">
                 <input
                   type="email"
@@ -131,7 +130,7 @@ export const Register = () => {
 
             {/* Teléfono */}
             <div className="sm:col-span-3">
-              <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">Teléfono:</label>
+              <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-300">Teléfono:</label>
               <div className="mt-2">
                 <input
                   type="text"
@@ -146,7 +145,7 @@ export const Register = () => {
 
             {/* Género */}
             <div className="sm:col-span-3">
-              <label htmlFor="gender" className="block text-sm font-medium leading-6 text-gray-900">Género:</label>
+              <label htmlFor="gender" className="block text-sm font-medium leading-6 text-gray-300">Género:</label>
               <div className="mt-2">
                 <select
                   name="gender"
@@ -164,7 +163,7 @@ export const Register = () => {
 
             {/* Descripción */}
             <div className="col-span-full">
-              <label htmlFor="bio" className="block text-sm font-medium leading-6 text-gray-900">Descripción:</label>
+              <label htmlFor="bio" className="block text-sm font-medium leading-6 text-gray-300">Descripción:</label>
               <div className="mt-2">
                 <textarea
                   name="bio"
@@ -178,7 +177,7 @@ export const Register = () => {
 
             {/* Ciudad */}
             <div className="sm:col-span-3">
-              <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">Ciudad:</label>
+              <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-300">Ciudad:</label>
               <div className="mt-2">
                 <input
                   type="text"
@@ -193,7 +192,7 @@ export const Register = () => {
 
             {/* País */}
             <div className="sm:col-span-3">
-              <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900">País:</label>
+              <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-300">País:</label>
               <div className="mt-2">
                 <input
                   type="text"
@@ -208,7 +207,7 @@ export const Register = () => {
 
             {/* Foto de Perfil */}
             <div className="sm:col-span-3">
-              <label htmlFor="profile_picture" className="block text-sm font-medium leading-6 text-gray-900">Foto de Perfil:</label>
+              <label htmlFor="profile_picture" className="block text-sm font-medium leading-6 text-gray-300">Foto de Perfil:</label>
               <div className="mt-2">
                 <input
                   type="file"
@@ -222,7 +221,7 @@ export const Register = () => {
 
             {/* Contraseña */}
             <div className="col-span-full">
-              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Contraseña:</label>
+              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-300">Contraseña:</label>
               <div className="mt-2">
                 <input
                   type="password"
@@ -237,7 +236,7 @@ export const Register = () => {
 
             {/* Confirmar Contraseña */}
             <div className="col-span-full">
-              <label htmlFor="password2" className="block text-sm font-medium leading-6 text-gray-900">Confirmar Contraseña:</label>
+              <label htmlFor="password2" className="block text-sm font-medium leading-6 text-gray-300">Confirmar Contraseña:</label>
               <div className="mt-2">
                 <input
                   type="password"
@@ -253,7 +252,8 @@ export const Register = () => {
 
           {/* Botón de Envío */}
           <div>
-            <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Registrarse</button>
+            <button type="submit" className="flex w-full justify-center my-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Registrarse</button>
+            <a href="/" className="flex w-full justify-center my-2 rounded-md bg-red-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700">Cancelar</a>
           </div>
 
           {/* Mostrar errores */}
