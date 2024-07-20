@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'users',
+    'skate'
 ]
 
 MIDDLEWARE = [
@@ -110,7 +111,7 @@ DATABASES = {
     #}
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'flipout_dev_app',
+        'NAME': 'flipout_db_app',
         'USER': 'root',
         'PASSWORD': 'Andres 2003#',
         'HOST': 'localhost',
