@@ -1,15 +1,11 @@
-import React from 'react'
-import axios from 'axios'
+import React from 'react';
 
-import data from './spots.json';
-import { SpotsList } from './SpotsList';
-
-const SpotCard = (props) => {
-
+const SpotCard = ({ children }) => {
   return (
     <div className='spots__section mt-6 justify-items-center grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5'>
-        {props.children}
+      {children}
     </div>
-  )
-}
-export {SpotCard}
+  );
+};
+
+export { SpotCard };
