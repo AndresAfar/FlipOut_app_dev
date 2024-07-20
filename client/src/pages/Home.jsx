@@ -1,7 +1,10 @@
+// src/pages/Home.jsx
+
 import React, { useState, useEffect } from 'react';
 import { SpotCard } from '../components/SpotCard';
 import { SpotsList } from '../components/SpotsList';
-import { getSpots } from '../api/spot.api'; // Asegúrate de que este es el camino correcto para importar getSpots
+import { getSpots } from '../api/spot.api';
+import MapComponent from '../components/MapComponent';
 
 const Home = () => {
   const [spots, setSpots] = useState([]);
@@ -21,10 +24,10 @@ const Home = () => {
 
   return (
     <>
-      <div className='container'>
+      <div className='container mx-auto px-4'>
         <div className='content-map pt-5 h-full w-full'>
           <div className='map text-white bg-slate-600 border-2 rounded-md h-[530px]'>
-            {/* Aquí va el componente del mapa */}
+            <MapComponent spots={spots} />
           </div>
         </div>
         <div className='content-bts w-full my-8 grid justify-items-end'>
@@ -37,9 +40,10 @@ const Home = () => {
           <SpotCard>
             {spots.map(spot => (
               <SpotsList
+                id={spot.id}
                 name={spot.name}
                 description={spot.description}
-                img={spot.images.length > 0 ? spot.images[0].image_path : 'default_image.jpg'} // Reemplaza 'default_image.jpg' con una imagen por defecto si no hay imágenes
+                img={spot.images.length > 0 ? spot.images[0].image_path : '/media/spots/images/default_image.jpg'}
                 key={spot.id}
               />
             ))}
