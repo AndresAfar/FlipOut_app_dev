@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+// Logotipo
+import logoFreeRail from '../../assets/logotipo-flipout.png'
+
 export const Register = () => {
     const navigate = useNavigate();
   // Estado para el formulario y errores
@@ -77,7 +80,7 @@ export const Register = () => {
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img className="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="FreeRail" />
+        <img className="mx-auto h-12 w-auto" src={logoFreeRail} alt="FreeRail" />
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-300">Registro</h2>
       </div>
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">

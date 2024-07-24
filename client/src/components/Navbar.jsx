@@ -3,6 +3,9 @@ import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { logoutUser } from '../api/users.api';
 
+// Logotipo
+import logoFreeRail from '../assets/logotipo-flipout.png'
+
 export const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -39,10 +42,10 @@ export const Navbar = () => {
     const currentPath = location.pathname;
 
     return (
-        <nav className="bg-gray-800 w-full">
+        <nav className="bg-[#101419] border-b-2 border-[#293038] w-full">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between p-4 w-full mx-auto">
                 <NavLink to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
+                    <img src={logoFreeRail} className="h-12" alt="Flowbite Logo" />
                     <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">Flowbite</span>
                 </NavLink>
                 <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -141,17 +144,7 @@ export const Navbar = () => {
                                             to="/"
                                             className="block rounded-md py-2 px-3 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                                         >
-                                            Home
-                                        </NavLink>
-                                    )}
-                                </li>
-                                <li>
-                                    {currentPath !== '/new-spot' && (
-                                        <NavLink
-                                            to="/new-spot"
-                                            className="block rounded-md py-2 px-3 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                                        >
-                                            Nuevo Spot
+                                            Inicio
                                         </NavLink>
                                     )}
                                 </li>
