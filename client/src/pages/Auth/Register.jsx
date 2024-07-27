@@ -38,7 +38,7 @@ export const Register = () => {
     e.preventDefault();
 
     // Verifica que las contraseñas coincidan
-    if (formData.password !== formData.confirmPassword) {
+    if (formData.password !== formData.password2) {
       setErrors('Las contraseñas no coinciden.');
       return;
     }

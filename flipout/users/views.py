@@ -29,21 +29,31 @@ class GetCSRFToken(APIView):
 class LoginView(APIView):
     permission_classes = [AllowAny]
 
-    # @method_decorator(ensure_csrf_cookie)
-    @method_decorator(csrf_exempt)
+    @method_decorator(ensure_csrf_cookie)
     def post(self, request):
         email = request.data.get('email')
         password = request.data.get('password')
-        user = authenticate(request, email=email, password=password)
-        if user:
-            login(request, user)
-            serializer = UserSerializer(user)
-            return Response({
-                "user": serializer.data,
-                "detail": "Successfully logged in."
-            })
+        
+        if email is None or password is None:
+            return Response({'error': 'Please provide both email and password'},
+                            status=status.HTTP_400_BAD_REQUEST)
+        
+        user = authenticate(request, username=email, password=password)
+        
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                serializer = UserSerializer(user)
+                return Response({
+                    "user": serializer.data,
+                    "detail": "Successfully logged in."
+                })
+            else:
+                return Response({"detail": "User account is disabled."},
+                                status=status.HTTP_403_FORBIDDEN)
         else:
-            return Response({"detail": "Invalid credentials."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "Invalid credentials."},
+                            status=status.HTTP_401_UNAUTHORIZED)
 
 class LogoutView(APIView):
     def post(self, request):

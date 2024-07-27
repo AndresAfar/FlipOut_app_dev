@@ -6,19 +6,22 @@ import { logoutUser } from '../api/users.api';
 // Logotipo
 import logoFreeRail from '../assets/logotipo-flipout.png'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/auth-status/', { withCredentials: true });
+                const response = await axios.get(`${API_BASE_URL}/api/auth-status/`, { withCredentials: true });
                 setIsAuthenticated(response.data.is_authenticated);
                 if (response.data.is_authenticated) {
-                    const userResponse = await axios.get('http://localhost:8000/api/user/', { withCredentials: true });
+                    const userResponse = await axios.get(`${API_BASE_URL}/api/user/`, { withCredentials: true });
                     setUser(userResponse.data);
                 }
             } catch (error) {
@@ -31,90 +34,93 @@ export const Navbar = () => {
     const handleLogout = async () => {
         try {
             await logoutUser();
-            localStorage.removeItem('user');  // Si estás almacenando información del usuario en localStorage
+            setIsAuthenticated(false);
+            setUser(null);
             navigate('/login');
         } catch (error) {
             console.error('Error during logout:', error);
         }
     };
 
-    // Obtener el pathname actual
     const currentPath = location.pathname;
+
+    const renderAuthButtons = () => (
+        <div className="flex items-center space-x-4">
+            <NavLink
+                to="/login"
+                className="rounded-md py-2 px-3 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >
+                Entrar
+            </NavLink>
+            <NavLink
+                to="/register"
+                className="rounded-md py-2 px-3 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >
+                Registrarse
+            </NavLink>
+        </div>
+    );
+
+    const renderUserMenu = () => (
+        <div className="relative">
+            <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+            >
+                <span className="sr-only">Open user menu</span>
+                <img
+                    className="h-8 w-8 rounded-full"
+                    src={user?.profile_picture || "/placeholder-avatar.jpg"}
+                    alt={user?.first_name}
+                />
+            </button>
+            {isMenuOpen && (
+                <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <NavLink to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        Perfil
+                    </NavLink>
+                    <NavLink to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        Ajustes
+                    </NavLink>
+                    <button
+                        onClick={handleLogout}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                        Cerrar Sesión
+                    </button>
+                </div>
+            )}
+        </div>
+    );
 
     return (
         <nav className="bg-[#101419] border-b-2 border-[#293038] w-full">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between p-4 w-full mx-auto">
-                <NavLink to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src={logoFreeRail} className="h-12" alt="Flowbite Logo" />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">Flowbite</span>
-                </NavLink>
-                <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    {isAuthenticated ? (
-                        <>
-                            <button
-                                type="button"
-                                className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300"
-                                id="user-menu-button"
-                                aria-expanded="false"
-                                data-dropdown-toggle="user-dropdown"
-                                data-dropdown-placement="bottom"
+                <div className="flex items-center">
+                    <NavLink to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+                        <img src={logoFreeRail} className="h-12" alt="FreeRail Logo" />
+                        <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">FlipOut</span>
+                    </NavLink>
+                    <div className="hidden md:flex md:ml-6">
+                        {currentPath !== '/' && !['/login', '/register'].includes(currentPath) && (
+                            <NavLink
+                                to="/"
+                                className="rounded-md py-2 px-3 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                             >
-                                <span className="sr-only">Open user menu</span>
-                                <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo" />
-                            </button>
-                            <div
-                                className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow"
-                                id="user-dropdown"
-                            >
-                                <div className="px-4 py-3">
-                                    <span className="block text-sm text-gray-900">{user ? user.first_name : 'Usuario'}</span>
-                                </div>
-                                <ul className="py-2" aria-labelledby="user-menu-button">
-                                    <li>
-                                        <NavLink to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                            Perfil
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                            Ajustes
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <button
-                                            onClick={handleLogout}
-                                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                        >
-                                            Cerrar Sesión
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </>
-                    ) : (
-                        !['/login', '/register'].includes(currentPath) && (
-                            <>
-                                <NavLink
-                                    to="/login"
-                                    className="block rounded-md py-2 px-3 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                                >
-                                    Entrar
-                                </NavLink>
-                                <NavLink
-                                    to="/register"
-                                    className="block rounded-md py-2 px-3 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                                >
-                                    Registrarse
-                                </NavLink>
-                            </>
-                        )
-                    )}
+                                Inicio
+                            </NavLink>
+                        )}
+                    </div>
+                </div>
+                <div className="flex items-center">
+                    {isAuthenticated ? renderUserMenu() : renderAuthButtons()}
                     <button
                         data-collapse-toggle="navbar-user"
                         type="button"
-                        className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 ml-2"
                         aria-controls="navbar-user"
-                        aria-expanded="false"
+                        aria-expanded={isMenuOpen}
                     >
                         <span className="sr-only">Open main menu</span>
                         <svg
@@ -134,25 +140,39 @@ export const Navbar = () => {
                         </svg>
                     </button>
                 </div>
-                <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-                    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
-                        {!['/login', '/register'].includes(currentPath) && (
+            </div>
+            {isMenuOpen && (
+                <div className="md:hidden" id="navbar-user">
+                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                        {currentPath !== '/' && !['/login', '/register'].includes(currentPath) && (
+                            <NavLink
+                                to="/"
+                                className="block rounded-md py-2 px-3 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                            >
+                                Inicio
+                            </NavLink>
+                        )}
+                        {!isAuthenticated && (
                             <>
-                                <li>
-                                    {currentPath !== '/' && (
-                                        <NavLink
-                                            to="/"
-                                            className="block rounded-md py-2 px-3 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                                        >
-                                            Inicio
-                                        </NavLink>
-                                    )}
-                                </li>
+                                <NavLink
+                                    to="/login"
+                                    className="block rounded-md py-2 px-3 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                                >
+                                    Entrar
+                                </NavLink>
+                                <NavLink
+                                    to="/register"
+                                    className="block rounded-md py-2 px-3 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                                >
+                                    Registrarse
+                                </NavLink>
                             </>
                         )}
-                    </ul>
+                    </div>
                 </div>
-            </div>
+            )}
         </nav>
     );
 };
+
+export default Navbar;
